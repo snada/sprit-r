@@ -1,0 +1,17 @@
+
+{
+  "name": "spriter",
+  "version": "0.0.0",
+  "description": "Simple spritesheet composer",
+  "main": "main.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/snada/spriter.git"
+  },
+  "author": "snada",
+  "license": "MIT",
+  "homepage": "spriter.snada.it",
+  "devDependencies": {
+    "electron-prebuilt": "^0.36.0"
+  }
+}
