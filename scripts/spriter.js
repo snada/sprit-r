@@ -1,5 +1,7 @@
 const electron = require('electron');
 const app = electron.app;
+const fs = require('fs');
+const path = require('path');
 
 var spriterApp = angular.module("spriterApp", []);
 
@@ -13,9 +15,22 @@ spriterApp.controller("spriterController", function($scope) {
         e.preventDefault();
         $element.removeClass('hover');
         return $scope.$apply(function() {
-          var uploads = e.originalEvent.dataTransfer.files;
+
+          var uploads = [].slice.call(e.originalEvent.dataTransfer.files).map(function(object) {
+            return object.path
+          });
+
+          if(uploads.length == 1 && fs.statSync(uploads[0]).isDirectory()) {
+            baseDir = uploads[0];
+            uploads = [];
+            files = fs.readdirSync(baseDir);
+            for(var counter = 0; counter < files.length; counter++) {
+              uploads.push(baseDir + path.sep + files[counter]);
+            }
+          }
+
           for(var counter = 0; counter < uploads.length; counter++) {
-            $scope.pictures.push(uploads[counter].path);
+            $scope.pictures.push(uploads[counter]);
           }
         });
       });
