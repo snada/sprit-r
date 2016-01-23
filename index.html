@@ -11,12 +11,20 @@
     <script type="text/javascript" src="scripts/spriter.js"></script>
   </head>
   <body ng-controller="spriterController">
-    <div>
+    <div ng-show="pictures.length == 0" class="ng-hide">
       <div id="drop" class="centered" drop-target>
         <p class="centered">
           <i class="fa fa-arrow-down"></i>
         </p>
       </div>
+    </div>
+
+    <div ng-show="pictures.length > 0" class="ng-hide">
+      <ul>
+        <li ng-repeat="pic in pictures">
+          {{pic}}
+        </li>
+      </ul>
     </div>
   </body>
 </html>
