@@ -1,5 +1,32 @@
 body {
-  background-color: white;
+  background-color: #004C86;
   -webkit-user-select: none;
   cursor: default;
+  overflow-y: hidden;
+  overflow-x: hidden;
+  font: 15px arial, sans-serif;
+}
+
+#drop {
+  border: 4px dashed #22805C;
+  margin: 0 auto;
+  color: white;
+  font-size: 20px;
+  height: 90%;
+  width: 90%;
+}
+
+#drop.hover {
+  border: 4px dashed #00A44E;
+}
+
+.centered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.fa-arrow-down {
+  font-size: 5em !important;
 }

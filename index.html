@@ -1,11 +1,30 @@
-<html>
+<html ng-app="spriterApp">
   <head>
     <meta charset="UTF-8">
     <title>Spriter</title>
     <link rel="stylesheet" type="text/css" href="css/index.css">
+    <link rel="stylesheet" type="text/css" href="node_modules/font-awesome/css/font-awesome.min.css">
+    <script>
+      window.$ = window.jQuery = require('./node_modules/jquery/dist/jquery.min.js');
+    </script>
+    <script type="text/javascript" src="node_modules/angular/angular.min.js"></script>
+    <script type="text/javascript" src="scripts/spriter.js"></script>
   </head>
-  <body>
-    <h1>Spriter</h1>
-    Simple tool to create sprite sheets from image frames
+  <body ng-controller="spriterController">
+    <div ng-show="pictures.length == 0" class="ng-hide">
+      <div id="drop" class="centered" drop-target>
+        <p class="centered">
+          <i class="fa fa-arrow-down"></i>
+        </p>
+      </div>
+    </div>
+
+    <div ng-show="pictures.length > 0" class="ng-hide">
+      <ul>
+        <li ng-repeat="pic in pictures">
+          {{pic}}
+        </li>
+      </ul>
+    </div>
   </body>
 </html>
