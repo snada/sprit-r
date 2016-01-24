@@ -9,7 +9,7 @@ const BrowserWindow = electron.BrowserWindow;
 let mainWindow;
 
 function createWindow () {
-  mainWindow = new BrowserWindow({width: 800, height: 600});
+  mainWindow = new BrowserWindow({width: 800, height: 600, show: false});
 
   var template = custom_menus.getMenu();
 
@@ -21,6 +21,11 @@ function createWindow () {
   electron.Menu.setApplicationMenu(menu);
 
   mainWindow.loadURL('file://' + __dirname + '/index.html');
+  mainWindow.webContents.on('did-finish-load', function() {
+    setTimeout(function(){
+        mainWindow.show();
+    }, 40);
+  });
 
   mainWindow.on('closed', function() {
     mainWindow = null;
