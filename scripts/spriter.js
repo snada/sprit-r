@@ -2,6 +2,8 @@ const electron = require('electron');
 const app = electron.app;
 const fs = require('fs');
 const path = require('path');
+const readChunk = require('read-chunk');
+const fileType = require('file-type');
 
 var spriterApp = angular.module("spriterApp", []);
 
@@ -17,7 +19,7 @@ spriterApp.controller("spriterController", function($scope) {
         return $scope.$apply(function() {
 
           var uploads = [].slice.call(e.originalEvent.dataTransfer.files).map(function(object) {
-            return object.path
+            return object.path;
           });
 
           if(uploads.length == 1 && fs.statSync(uploads[0]).isDirectory()) {
@@ -30,7 +32,13 @@ spriterApp.controller("spriterController", function($scope) {
           }
 
           for(var counter = 0; counter < uploads.length; counter++) {
-            $scope.pictures.push(uploads[counter]);
+            if(fs.statSync(uploads[counter]).isFile()) {
+              var buffer = readChunk.sync(uploads[counter], 0, 262);
+              var type = fileType(buffer).mime.split('/')[0];
+              if(type == "image") {
+                $scope.pictures.push(uploads[counter]);
+              }
+            }
           }
         });
       });
