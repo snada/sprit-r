@@ -9,7 +9,13 @@ const BrowserWindow = electron.BrowserWindow;
 let mainWindow;
 
 function createWindow () {
-  mainWindow = new BrowserWindow({width: 800, height: 600, show: false});
+  mainWindow = new BrowserWindow({
+    'width': 800,
+    'height': 600,
+    'min-width': 400,
+    'min-height': 300,
+    show: false
+  });
 
   var template = custom_menus.getMenu();
 
