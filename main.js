@@ -27,6 +27,9 @@ function createWindow () {
   electron.Menu.setApplicationMenu(menu);
 
   mainWindow.loadURL('file://' + __dirname + '/index.html');
+  mainWindow.webContents.on('will-navigate', function(e) {
+    e.preventDefault();
+  })
   mainWindow.webContents.on('did-finish-load', function() {
     setTimeout(function(){
         mainWindow.show();
