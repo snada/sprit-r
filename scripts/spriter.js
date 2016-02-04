@@ -36,8 +36,8 @@ spriterApp.controller("spriterController", function($scope) {
         for(var counter = 0; counter < uploads.length; counter++) {
           if(fs.statSync(uploads[counter]).isFile()) {
             var buffer = readChunk.sync(uploads[counter], 0, 262);
-            var type = fileType(buffer).mime.split('/')[0];
-            if(type == "image") {
+            var ft = fileType(buffer);
+            if (ft && ft.mime && ft.mime.split('/')[0] == "image") {
               readPics(uploads[counter]);
             }
           }
