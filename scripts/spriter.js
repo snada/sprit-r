@@ -4,11 +4,14 @@ const fs = require('fs');
 const path = require('path');
 const readChunk = require('read-chunk');
 const fileType = require('file-type');
+const Jimp = require("jimp");
 
 var spriterApp = angular.module("spriterApp", []);
 
 spriterApp.controller("spriterController", function($scope) {
   $scope.pictures = [];
+  $scope.width = null;
+  $scope.height = null;
 })
   .directive('dropTarget', function() {
     return function($scope, $element) {
@@ -16,32 +19,53 @@ spriterApp.controller("spriterController", function($scope) {
       $element.on('drop', function(e) {
         e.preventDefault();
         $element.removeClass('hover');
-        return $scope.$apply(function() {
 
-          var uploads = [].slice.call(e.originalEvent.dataTransfer.files).map(function(object) {
-            return object.path;
-          });
+        var uploads = [].slice.call(e.originalEvent.dataTransfer.files).map(function(object) {
+          return object.path;
+        });
 
-          if(uploads.length == 1 && fs.statSync(uploads[0]).isDirectory()) {
-            baseDir = uploads[0];
-            uploads = [];
-            files = fs.readdirSync(baseDir);
-            for(var counter = 0; counter < files.length; counter++) {
-              uploads.push(baseDir + path.sep + files[counter]);
+        if(uploads.length == 1 && fs.statSync(uploads[0]).isDirectory()) {
+          baseDir = uploads[0];
+          uploads = [];
+          files = fs.readdirSync(baseDir);
+          for(var counter = 0; counter < files.length; counter++) {
+            uploads.push(baseDir + path.sep + files[counter]);
+          }
+        }
+
+        for(var counter = 0; counter < uploads.length; counter++) {
+          if(fs.statSync(uploads[counter]).isFile()) {
+            var buffer = readChunk.sync(uploads[counter], 0, 262);
+            var type = fileType(buffer).mime.split('/')[0];
+            if(type == "image") {
+              readPics(uploads[counter]);
             }
           }
+        }
+      });
 
-          for(var counter = 0; counter < uploads.length; counter++) {
-            if(fs.statSync(uploads[counter]).isFile()) {
-              var buffer = readChunk.sync(uploads[counter], 0, 262);
-              var type = fileType(buffer).mime.split('/')[0];
-              if(type == "image") {
-                $scope.pictures.push(uploads[counter]);
-              }
+      var readPics = function(path) {
+        Jimp.read(path, function(err, pic) {
+          if(!err) {
+            if(!$scope.width) {
+              $scope.$apply(function(){
+                $scope.width = pic.bitmap.width;
+                $scope.height = pic.bitmap.height;
+              });
+            }
+
+            if(pic.bitmap.width == $scope.width && pic.bitmap.height == $scope.height) {
+              console.log("pushed: " + path);
+              $scope.$apply(function() {
+                $scope.pictures.push({
+                  pic: pic,
+                  path: path
+                });
+              });
             }
           }
         });
-      });
+      };
 
       $element.on('dragover', function() {
         $element.addClass('hover');

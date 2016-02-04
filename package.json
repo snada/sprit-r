@@ -20,6 +20,7 @@
     "angular": "1.4.9",
     "font-awesome": "4.5.0",
     "read-chunk": "1.0.1",
-    "file-type": "3.5.0"
+    "file-type": "3.5.0",
+    "jimp": "0.2.21"
   }
 }
