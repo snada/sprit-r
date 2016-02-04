@@ -55,7 +55,6 @@ spriterApp.controller("spriterController", function($scope) {
             }
 
             if(pic.bitmap.width == $scope.width && pic.bitmap.height == $scope.height) {
-              console.log("pushed: " + path);
               $scope.$apply(function() {
                 $scope.pictures.push({
                   pic: pic,
@@ -67,17 +66,24 @@ spriterApp.controller("spriterController", function($scope) {
         });
       };
 
-      $element.on('dragover', function() {
+      $element.on('dragenter', function(e) {
+        e.originalEvent.dataTransfer.dropEffect = 'copy';
+        e.preventDefault();
+      });
+
+      $element.on('dragover', function(e) {
         $element.addClass('hover');
+        e.originalEvent.dataTransfer.dropEffect = 'copy';
+        e.preventDefault();
       });
 
       $element.on('dragleave', function() {
         $element.removeClass('hover');
       });
 
-      $element.on('dragenter dragstart dragend dragleave dragover drag', function(e) {
+      $element.on('dragstart dragend dragleave drag', function(e) {
         e.preventDefault();
-      })
+      });
     };
 
   });
