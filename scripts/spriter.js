@@ -49,6 +49,11 @@ spriterApp.controller("spriterController", function($scope) {
         readPics(uploads).then(function(result) {
           $scope.$apply(function() {
             if($scope.pictures.length > 0) {
+              $scope.pictures.sort(function(a, b) {
+                if(a.path < b.path) return -1;
+                if(a.path > b.path) return 1;
+                return 0;
+              });
               $scope.stateMachine.editor();
             }
             else {
