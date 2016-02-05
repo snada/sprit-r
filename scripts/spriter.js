@@ -65,24 +65,27 @@ spriterApp.controller("spriterController", function($scope) {
               var buffer = readChunk.sync(path, 0, 262);
               var ft = fileType(buffer);
               Jimp.read(path, function(err, pic) {
+                var solved = false;
                 if(!err) {
-                  if(!$scope.width) {
-                    $scope.$apply(function(){
-                      $scope.width = pic.bitmap.width;
-                      $scope.height = pic.bitmap.height;
-                    });
-                  }
-                  if(pic.bitmap.width == $scope.width && pic.bitmap.height == $scope.height) {
-                    $scope.$apply(function() {
+                  $scope.$apply(function() {
+                    if(!$scope.width) {
+                        $scope.width = pic.bitmap.width;
+                        $scope.height = pic.bitmap.height;
+                    }
+                    if(pic.bitmap.width == $scope.width && pic.bitmap.height == $scope.height) {
                       $scope.pictures.push({
                         pic: pic,
                         path: path
                       });
-                    });
-                  }
+                      solved = true;
+                    }
+                  });
                 }
-                resolve(true);
+                resolve(solved);
               });
+            }
+            else {
+              resolve(false);
             }
           });
         });
@@ -108,5 +111,4 @@ spriterApp.controller("spriterController", function($scope) {
         e.preventDefault();
       });
     };
-
   });
