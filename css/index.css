@@ -5,13 +5,12 @@ body {
   overflow-y: hidden;
   overflow-x: hidden;
   font: 15px arial, sans-serif;
+  color: white;
 }
 
 #drop {
   border: 4px dashed #22805C;
   margin: 0 auto;
-  color: white;
-  font-size: 20px;
   height: 90%;
   width: 90%;
 }
@@ -27,6 +26,6 @@ body {
   transform: translate(-50%, -50%);
 }
 
-.fa-arrow-down {
-  font-size: 5em !important;
+.icon {
+  font-size: 4em !important;
 }

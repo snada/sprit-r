@@ -5,6 +5,7 @@ const path = require('path');
 const readChunk = require('read-chunk');
 const fileType = require('file-type');
 const Jimp = require("jimp");
+const jssm = require("javascript-state-machine");
 
 var spriterApp = angular.module("spriterApp", []);
 
@@ -12,6 +13,14 @@ spriterApp.controller("spriterController", function($scope) {
   $scope.pictures = [];
   $scope.width = null;
   $scope.height = null;
+  $scope.stateMachine = jssm.create({
+    initial: 'drop',
+    events: [
+      { name: 'loading',  from: 'drop',  to: 'loading' },
+      { name: 'editor', from: 'loading', to: 'editor' },
+      { name: 'drop', from: ['loading', 'editor'], to: 'drop' }
+    ]
+  });
 })
   .directive('dropTarget', function() {
     return function($scope, $element) {
@@ -19,6 +28,10 @@ spriterApp.controller("spriterController", function($scope) {
       $element.on('drop', function(e) {
         e.preventDefault();
         $element.removeClass('hover');
+
+        $scope.$apply(function() {
+          $scope.stateMachine.loading();
+        });
 
         var uploads = [].slice.call(e.originalEvent.dataTransfer.files).map(function(object) {
           return object.path;
@@ -33,37 +46,47 @@ spriterApp.controller("spriterController", function($scope) {
           }
         }
 
-        for(var counter = 0; counter < uploads.length; counter++) {
-          if(fs.statSync(uploads[counter]).isFile()) {
-            var buffer = readChunk.sync(uploads[counter], 0, 262);
-            var ft = fileType(buffer);
-            if (ft && ft.mime && ft.mime.split('/')[0] == "image") {
-              readPics(uploads[counter]);
+        readPics(uploads).then(function(result) {
+          $scope.$apply(function() {
+            if($scope.pictures.length > 0) {
+              $scope.stateMachine.editor();
             }
-          }
-        }
+            else {
+              $scope.stateMachine.drop();
+            }
+          });
+        });
       });
 
-      var readPics = function(path) {
-        Jimp.read(path, function(err, pic) {
-          if(!err) {
-            if(!$scope.width) {
-              $scope.$apply(function(){
-                $scope.width = pic.bitmap.width;
-                $scope.height = pic.bitmap.height;
+      var readPics = function(uploads) {
+        var promises = uploads.map(function(path) {
+          return new Promise(function(resolve, reject) {
+            if(fs.statSync(path).isFile()) {
+              var buffer = readChunk.sync(path, 0, 262);
+              var ft = fileType(buffer);
+              Jimp.read(path, function(err, pic) {
+                if(!err) {
+                  if(!$scope.width) {
+                    $scope.$apply(function(){
+                      $scope.width = pic.bitmap.width;
+                      $scope.height = pic.bitmap.height;
+                    });
+                  }
+                  if(pic.bitmap.width == $scope.width && pic.bitmap.height == $scope.height) {
+                    $scope.$apply(function() {
+                      $scope.pictures.push({
+                        pic: pic,
+                        path: path
+                      });
+                    });
+                  }
+                }
+                resolve(true);
               });
             }
-
-            if(pic.bitmap.width == $scope.width && pic.bitmap.height == $scope.height) {
-              $scope.$apply(function() {
-                $scope.pictures.push({
-                  pic: pic,
-                  path: path
-                });
-              });
-            }
-          }
+          });
         });
+        return Promise.all(promises);
       };
 
       $element.on('dragenter', function(e) {

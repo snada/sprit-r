@@ -13,15 +13,21 @@
   </head>
   <body ng-controller="spriterController">
 
-    <div ng-show="pictures.length == 0" class="ng-hide">
+    <div ng-show="stateMachine.is('drop')" class="ng-hide">
       <div id="drop" class="centered" drop-target>
         <p class="centered">
-          <i class="fa fa-arrow-down"></i>
+          <i class="icon fa fa-arrow-down"></i>
         </p>
       </div>
     </div>
 
-    <div ng-show="pictures.length > 0" class="ng-hide">
+    <div ng-show="stateMachine.is('loading')" class="ng-hide">
+      <p class="centered">
+        <i class="icon fa fa-spinner fa-spin"></i>
+      </p>
+    </div>
+
+    <div ng-show="stateMachine.is('editor')" class="ng-hide">
       <ul>
         <li ng-repeat="pic in pictures">
           {{pic.path}}
