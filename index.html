@@ -27,13 +27,22 @@
       </p>
     </div>
 
-    <div ng-show="stateMachine.is('editor')" class="ng-hide">
-      <ul>
-        <li ng-repeat="pic in pictures">
-          {{pic.path}}
-        </li>
-      </ul>
+    <div id="editor" ng-show="stateMachine.is('editor')" class="ng-hide">
+      <div id="editor-sidebar">
+        <div id="editor-dragbar"></div>
+        <ul>
+          <li ng-repeat="pic in pictures">
+            {{pic.path}}
+          </li>
+        </ul>
+      </div>
+      <div id="editor-preview">
+        <div id="preview-wrapper">
+            PREVIEW
+        </div>
+      </div>
     </div>
 
   </body>
+  <script type="text/javascript" src="scripts/editor.js"></script>
 </html>

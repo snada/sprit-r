@@ -4,8 +4,10 @@ body {
   cursor: default;
   overflow-y: hidden;
   overflow-x: hidden;
-  font: 15px arial, sans-serif;
+  font: 10px arial, sans-serif;
   color: white;
+  padding: 0px;
+  margin: 0px;
 }
 
 #drop {
@@ -17,6 +19,34 @@ body {
 
 #drop.hover {
   border: 4px dashed #00A44E;
+}
+
+#editor-preview {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#preview-wrapper {
+  max-width: 50%;
+}
+
+#editor-sidebar {
+    width: 200px;
+    min-width: 3px;
+    max-width: 50%;
+    float: left;
+    white-space: nowrap;
+    overflow-x: hidden;
+}
+
+#editor-dragbar {
+    background-color:black;
+    height:100%;
+    float: right;
+    width: 3px;
+    cursor: col-resize;
 }
 
 .centered {
