@@ -3,6 +3,7 @@
     <meta charset="UTF-8">
     <title>Spriter</title>
     <link rel="stylesheet" type="text/css" href="css/index.css">
+    <link rel="stylesheet" type="text/css" href="css/button.css">
     <link rel="stylesheet" type="text/css" href="node_modules/font-awesome/css/font-awesome.min.css">
     <script>
       window.$ = window.jQuery = require('./node_modules/jquery/dist/jquery.min.js');
@@ -28,21 +29,45 @@
     </div>
 
     <div id="editor" ng-show="stateMachine.is('editor')" class="ng-hide">
-      <div id="editor-sidebar">
-        <div id="editor-dragbar"></div>
-        <ul>
-          <li ng-repeat="pic in pictures">
-            {{pic.path}}
-          </li>
-        </ul>
-      </div>
       <div id="editor-preview">
-        <div id="preview-wrapper">
-            PREVIEW
+        PREVIEW
+      </div>
+
+      <div id="editor-sidebar">
+
+
+
+        <div id="editor-sidebar-commands" class="centered-text">
+
+          <div id="editor-dragbar"></div>
+
+          <section class="press">
+              <button class="green">
+                <i class="fa fa-floppy-o"></i>
+              </button>
+          </section>
+
+          <section class="press">
+              <button class="red">
+                <i class="fa fa-trash"></i>
+              </button>
+          </section>
+
+          <div>
+            <input type="range"></input>
+          </div>
         </div>
+
+        <div id="editor-sidebar-list">
+          <ul>
+            <li ng-repeat="pic in pictures">
+              {{pic.path}}
+            </li>
+          </ul>
+        </div>
+
       </div>
     </div>
-
   </body>
   <script type="text/javascript" src="scripts/editor.js"></script>
 </html>

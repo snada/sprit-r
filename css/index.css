@@ -22,31 +22,48 @@ body {
 }
 
 #editor-preview {
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-#preview-wrapper {
-  max-width: 50%;
+  margin-left:200px;
+  min-height:100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 #editor-sidebar {
-    width: 200px;
-    min-width: 3px;
-    max-width: 50%;
-    float: left;
-    white-space: nowrap;
-    overflow-x: hidden;
+  position: fixed;
+  top: 100px;
+  bottom: 0;
+  left: 0;
+  width: 200px;
+  overflow-x: hidden;
+  white-space: nowrap;
+}
+
+#editor-sidebar-commands {
+  top: 0;
+  bottom: 0;
+  left: 0;
+  height: 100px;
+  width: 200px;
+  position: fixed;
+  overflow-x: hidden;
+  white-space: nowrap;
 }
 
 #editor-dragbar {
-    background-color:black;
-    height:100%;
-    float: right;
-    width: 3px;
-    cursor: col-resize;
+  height: 100%;
+  float:right;
+  position: fixed;
+  left: 200px;
+  width: 3px;
+  margin-left: 1px;
+  cursor: col-resize;
+  background-color: #22805C;
+}
+
+.centered-text {
+  text-align: center;
 }
 
 .centered {
