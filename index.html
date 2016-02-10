@@ -30,42 +30,40 @@
 
     <div id="editor" ng-show="stateMachine.is('editor')" class="ng-hide">
       <div id="editor-preview">
-        PREVIEW
+        PREVIEW<br>
+        {{scale}}, {{rows}} x {{cols}}<br>
       </div>
-
       <div id="editor-sidebar">
-
-
-
         <div id="editor-sidebar-commands" class="centered-text">
-
           <div id="editor-dragbar"></div>
-
-          <section class="press">
-              <button class="green">
-                <i class="fa fa-floppy-o"></i>
-              </button>
-          </section>
-
-          <section class="press">
-              <button class="red">
-                <i class="fa fa-trash"></i>
-              </button>
-          </section>
-
-          <div>
-            <input type="range"></input>
+          <div class="command">
+            <section class="press">
+                <button class="green">
+                  <i class="fa fa-floppy-o"></i>
+                </button>
+            </section>
+            <section class="press">
+                <button class="red">
+                  <i class="fa fa-trash"></i>
+                </button>
+            </section>
+          </div>
+          <div class="command">
+            <span class="label"><i class="fa fa-search-minus"></i></span>
+            <input id="scale" type="range" min="1" max="100" ng-model="scale"></input>
+            <span class="label"><i class="fa fa-search-plus"></i></span>
+          </div>
+          <div class="command">
+            <select ng-model="rows" ng-options="(pictures.indexOf(pic)+1) as pictures.indexOf(pic)+1 for pic in pictures" ></select>
+            x
+            <select ng-model="cols" ng-options="(pictures.indexOf(pic)+1) as pictures.indexOf(pic)+1 for pic in pictures" ></select>
           </div>
         </div>
-
-        <div id="editor-sidebar-list">
-          <ul>
-            <li ng-repeat="pic in pictures">
-              {{pic.path}}
-            </li>
-          </ul>
+        <div id="editor-sidebar-list" class="centered-text">
+          <div class="command" ng-repeat="pic in pictures" ng-show="pictures.length > 0">
+            <img class="pic-thumb" ng-src="{{ pic.path }}"></img>
+          </div>
         </div>
-
       </div>
     </div>
   </body>

@@ -32,7 +32,7 @@ body {
 
 #editor-sidebar {
   position: fixed;
-  top: 100px;
+  top: 120px;
   bottom: 0;
   left: 0;
   width: 200px;
@@ -40,11 +40,21 @@ body {
   white-space: nowrap;
 }
 
+#editor-sidebar::-webkit-scrollbar {
+  background: transparent;  /* optional: just make scrollbar invisible */
+  width: 1px;
+  margin-right: 1px;
+}
+
+#editor-sidebar::-webkit-scrollbar-thumb {
+  background: #002d4f;
+}
+
 #editor-sidebar-commands {
   top: 0;
   bottom: 0;
   left: 0;
-  height: 100px;
+  height: 120px;
   width: 200px;
   position: fixed;
   overflow-x: hidden;
@@ -60,6 +70,19 @@ body {
   margin-left: 1px;
   cursor: col-resize;
   background-color: #22805C;
+}
+
+.command {
+  margin-top: 10px;
+  min-width: 200px;
+}
+
+.pic-thumb {
+  max-width: 160px;
+}
+
+.label {
+  font-size: 20px;
 }
 
 .centered-text {

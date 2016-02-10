@@ -37,11 +37,11 @@ section.press button.red {
 }
 
 section.press button:active.green, section.press button.active.green {
-  background-color: #2a9d71;
+  background-color: #009e62;
   box-shadow: 0 2px #22805C;
 }
 
 section.press button:active.red, section.press button.active.red {
-  background-color: #af1433;
+  background-color: #c7173a;
   box-shadow: 0 2px #bb0000;
 }
