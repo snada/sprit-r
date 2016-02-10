@@ -4,8 +4,10 @@ body {
   cursor: default;
   overflow-y: hidden;
   overflow-x: hidden;
-  font: 15px arial, sans-serif;
+  font: 10px arial, sans-serif;
   color: white;
+  padding: 0px;
+  margin: 0px;
 }
 
 #drop {
@@ -17,6 +19,74 @@ body {
 
 #drop.hover {
   border: 4px dashed #00A44E;
+}
+
+#editor-preview {
+  margin-left:200px;
+  min-height:100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#editor-sidebar {
+  position: fixed;
+  top: 120px;
+  bottom: 0;
+  left: 0;
+  width: 200px;
+  overflow-x: hidden;
+  white-space: nowrap;
+}
+
+#editor-sidebar::-webkit-scrollbar {
+  background: transparent;  /* optional: just make scrollbar invisible */
+  width: 1px;
+  margin-right: 1px;
+}
+
+#editor-sidebar::-webkit-scrollbar-thumb {
+  background: #002d4f;
+}
+
+#editor-sidebar-commands {
+  top: 0;
+  bottom: 0;
+  left: 0;
+  height: 120px;
+  width: 200px;
+  position: fixed;
+  overflow-x: hidden;
+  white-space: nowrap;
+}
+
+#editor-dragbar {
+  height: 100%;
+  float:right;
+  position: fixed;
+  left: 200px;
+  width: 3px;
+  margin-left: 1px;
+  cursor: col-resize;
+  background-color: #22805C;
+}
+
+.command {
+  margin-top: 10px;
+  min-width: 200px;
+}
+
+.pic-thumb {
+  max-width: 160px;
+}
+
+.label {
+  font-size: 20px;
+}
+
+.centered-text {
+  text-align: center;
 }
 
 .centered {

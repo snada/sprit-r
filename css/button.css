@@ -1,0 +1,47 @@
+section {
+  display: inline;
+}
+
+button {
+  margin-top: 5px;
+  padding: 10px 20px;
+  font-size: 20px;
+  line-height: 1.8;
+  appearance: none;
+  box-shadow: none;
+  border-radius: 0;
+  color: white;
+}
+
+button:focus {
+  outline: none
+}
+
+section.press button {
+  border: none;
+  border-radius: 15px;
+}
+
+section.press button:active, section.press button.active {
+  transform: translateY(5px);
+}
+
+section.press button.green {
+  background-color: #00A44E;
+  box-shadow: 0 5px #22805C;
+}
+
+section.press button.red {
+  background-color: #dd1940;
+  box-shadow: 0 5px #bb0000;
+}
+
+section.press button:active.green, section.press button.active.green {
+  background-color: #009e62;
+  box-shadow: 0 2px #22805C;
+}
+
+section.press button:active.red, section.press button.active.red {
+  background-color: #c7173a;
+  box-shadow: 0 2px #bb0000;
+}

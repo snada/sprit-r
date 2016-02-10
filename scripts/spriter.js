@@ -13,6 +13,9 @@ spriterApp.controller("spriterController", function($scope) {
   $scope.pictures = [];
   $scope.width = null;
   $scope.height = null;
+  $scope.rows = 0;
+  $scope.cols = 0;
+  $scope.scale = 100;
   $scope.stateMachine = jssm.create({
     initial: 'drop',
     events: [
@@ -54,6 +57,8 @@ spriterApp.controller("spriterController", function($scope) {
                 if(a.path > b.path) return 1;
                 return 0;
               });
+              $scope.cols = $scope.pictures.length;
+              $scope.rows = 1;
               $scope.stateMachine.editor();
             }
             else {
