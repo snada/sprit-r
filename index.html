@@ -29,23 +29,18 @@
     </div>
 
     <div id="editor" ng-show="stateMachine.is('editor')" class="ng-hide">
-      <div id="editor-preview">
-        PREVIEW<br>
-        {{scale}}, {{rows}} x {{cols}}<br>
-      </div>
       <div id="editor-sidebar">
         <div id="editor-sidebar-commands" class="centered-text">
-          <div id="editor-dragbar"></div>
           <div class="command">
             <section class="press">
-                <button class="green">
-                  <i class="fa fa-floppy-o"></i>
-                </button>
+              <button class="green">
+                <i class="fa fa-floppy-o"></i>
+              </button>
             </section>
             <section class="press">
-                <button class="red">
-                  <i class="fa fa-trash"></i>
-                </button>
+              <button class="red">
+                <i class="fa fa-trash"></i>
+              </button>
             </section>
           </div>
           <div class="command">
@@ -54,9 +49,15 @@
             <span class="label"><i class="fa fa-search-plus"></i></span>
           </div>
           <div class="command">
-            <select ng-model="rows" ng-options="(pictures.indexOf(pic)+1) as pictures.indexOf(pic)+1 for pic in pictures" ></select>
+            <select
+              ng-model="rows"
+              ng-change="calculateCols()"
+              ng-options="(pictures.indexOf(pic)+1) as pictures.indexOf(pic)+1 for pic in pictures"></select>
             x
-            <select ng-model="cols" ng-options="(pictures.indexOf(pic)+1) as pictures.indexOf(pic)+1 for pic in pictures" ></select>
+            <select
+              ng-model="cols"
+              ng-change="calculateRows()"
+              ng-options="(pictures.indexOf(pic)+1) as pictures.indexOf(pic)+1 for pic in pictures"></select>
           </div>
         </div>
         <div id="editor-sidebar-list" class="centered-text">
@@ -65,7 +66,19 @@
           </div>
         </div>
       </div>
+      <div id="editor-dragbar"></div>
+      <div id="editor-content">
+        <div id="table">
+          <div ng-model="matrix" ng-repeat="row in matrix" style="display: inline">
+            <div ng-repeat="pic in row" style="display:table-cell">
+              <img class="thumbnail" ng-src="{{pic.path}}">
+            </div>
+          </div>
+          <br ng-if="$index == rows - 1">
+        </div>
+      </div>
     </div>
+
   </body>
   <script type="text/javascript" src="scripts/editor.js"></script>
 </html>

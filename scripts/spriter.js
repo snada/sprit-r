@@ -11,6 +11,7 @@ var spriterApp = angular.module("spriterApp", []);
 
 spriterApp.controller("spriterController", function($scope) {
   $scope.pictures = [];
+  $scope.matrix = [];
   $scope.width = null;
   $scope.height = null;
   $scope.rows = 0;
@@ -24,6 +25,36 @@ spriterApp.controller("spriterController", function($scope) {
       { name: 'drop', from: ['loading', 'editor'], to: 'drop' }
     ]
   });
+
+  $scope.calculateCols = function() {
+     var tmp = Math.floor($scope.pictures.length / $scope.rows);
+     if(tmp * $scope.rows < $scope.pictures.length) { tmp++; }
+     $scope.cols = tmp;
+     $scope.calculateMatrix();
+  };
+
+  $scope.calculateRows = function() {
+     var tmp = Math.floor($scope.pictures.length / $scope.cols);
+     if(tmp * $scope.cols < $scope.pictures.length) { tmp++; }
+     $scope.rows = tmp;
+     $scope.calculateMatrix();
+  };
+
+  $scope.calculateMatrix = function() {
+    $scope.matrix = [];
+    for(var counter = 0; counter < $scope.rows; counter++) {
+      $scope.matrix.push([]);
+    }
+
+    var row = 0;
+    for(var counter = 0; counter < $scope.pictures.length; counter++) {
+      $scope.matrix[row].push($scope.pictures[counter]);
+      if($scope.matrix[row].length == $scope.cols) {
+        row++;
+      }
+    }
+    console.log($scope.matrix);
+  };
 })
   .directive('dropTarget', function() {
     return function($scope, $element) {
@@ -60,6 +91,7 @@ spriterApp.controller("spriterController", function($scope) {
               $scope.cols = $scope.pictures.length;
               $scope.rows = 1;
               $scope.stateMachine.editor();
+              $scope.calculateMatrix();
             }
             else {
               $scope.stateMachine.drop();

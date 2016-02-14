@@ -4,12 +4,14 @@ $('#editor-dragbar').on('mousedown', function(e) {
   $(document).on('mousemove', function(e) {
     if(e.pageX < $(document).width() / 2 && e.pageX >= 0) {
       $('#editor-sidebar').css('width', e.pageX);
-      $('#editor-dragbar').css('left', e.pageX);
-      $('#editor-preview').css('margin-left', e.pageX);
-      $('#editor-sidebar-commands').css('width', e.pageX);
+      $('#editor-content').css('left', e.pageX);
     }
   });
 });
+
+//Window resize event handler
+//if editor-sidebar.width > 50%
+//  editor.sidebar.width = 50%
 
 $(document).on('mouseup', function(e){
   $(document).unbind('mousemove');
