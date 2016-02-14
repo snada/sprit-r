@@ -9,9 +9,12 @@ $('#editor-dragbar').on('mousedown', function(e) {
   });
 });
 
-//Window resize event handler
-//if editor-sidebar.width > 50%
-//  editor.sidebar.width = 50%
+$(window).on('resize', function() {
+  var limit = $(document).width() / 2;
+  if($('#editor-sidebar').width() > limit) {
+    $('#editor-sidebar').css('width', limit);
+  }
+});
 
 $(document).on('mouseup', function(e){
   $(document).unbind('mousemove');
