@@ -26,6 +26,14 @@ spriterApp.controller("spriterController", function($scope) {
     ]
   });
 
+  $scope.frameWidth = function() {
+    return Math.floor(($scope.width / 100) * $scope.scale);
+  };
+
+  $scope.frameHeight = function() {
+    return Math.floor(($scope.height / 100) * $scope.scale);
+  };
+
   $scope.calculateCols = function() {
      var tmp = Math.floor($scope.pictures.length / $scope.rows);
      if(tmp * $scope.rows < $scope.pictures.length) { tmp++; }

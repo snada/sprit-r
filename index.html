@@ -47,6 +47,7 @@
             <span class="label"><i class="fa fa-search-minus"></i></span>
             <input id="scale" type="range" min="1" max="100" ng-model="scale"></input>
             <span class="label"><i class="fa fa-search-plus"></i></span>
+            <div><i class="fa fa-arrows-h"></i> {{ frameWidth() }} <i class="fa fa-arrows-v"></i> {{ frameHeight() }}</div>
           </div>
           <div class="command">
             <select
@@ -71,7 +72,7 @@
         <div id="table">
           <div ng-model="matrix" ng-repeat="row in matrix" style="display: inline">
             <div ng-repeat="pic in row" style="display:table-cell">
-              <img class="thumbnail" ng-src="{{pic.path}}">
+              <img ng-model="scale" class="thumbnail" ng-src="{{pic.path}}" ng-style="{width: frameWidth(), height: frameHeight()}">
             </div>
           </div>
           <br ng-if="$index == rows - 1">
