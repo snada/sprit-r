@@ -10,13 +10,7 @@ const jssm = require("javascript-state-machine");
 var spriterApp = angular.module("spriterApp", []);
 
 spriterApp.controller("spriterController", function($scope) {
-  $scope.pictures = [];
-  $scope.matrix = [];
-  $scope.width = null;
-  $scope.height = null;
-  $scope.rows = 0;
-  $scope.cols = 0;
-  $scope.scale = 100;
+
   $scope.stateMachine = jssm.create({
     initial: 'drop',
     events: [
@@ -25,6 +19,16 @@ spriterApp.controller("spriterController", function($scope) {
       { name: 'drop', from: ['loading', 'editor'], to: 'drop' }
     ]
   });
+
+  ($scope.reset = function() {
+    $scope.pictures = [];
+    $scope.matrix = [];
+    $scope.width = null;
+    $scope.height = null;
+    $scope.rows = 0;
+    $scope.cols = 0;
+    $scope.scale = 100;
+  })();
 
   $scope.frameWidth = function() {
     return Math.floor(($scope.width / 100) * $scope.scale);
@@ -46,6 +50,11 @@ spriterApp.controller("spriterController", function($scope) {
      if(tmp * $scope.cols < $scope.pictures.length) { tmp++; }
      $scope.rows = tmp;
      $scope.calculateMatrix();
+  };
+
+  $scope.deletePics = function() {
+    $scope.reset();
+    $scope.stateMachine.drop();
   };
 
   $scope.calculateMatrix = function() {
