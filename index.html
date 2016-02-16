@@ -63,16 +63,16 @@
         </div>
         <div id="editor-sidebar-list" class="centered-text">
           <div class="command" ng-repeat="pic in pictures" ng-show="pictures.length > 0">
-            <img class="pic-thumb" ng-src="{{ pic.path }}"></img>
+            <img class="transparent thumbnail" ng-src="{{ pic.path }}"></img>
           </div>
         </div>
       </div>
       <div id="editor-dragbar"></div>
       <div id="editor-content">
-        <div id="table">
+        <div id="table" class="transparent">
           <div ng-model="matrix" ng-repeat="row in matrix" style="display: inline">
             <div ng-repeat="pic in row" style="display:table-cell">
-              <img ng-model="scale" class="thumbnail" ng-src="{{pic.path}}" ng-style="{width: frameWidth(), height: frameHeight()}">
+              <img ng-model="scale" ng-src="{{pic.path}}" ng-style="{width: frameWidth(), height: frameHeight()}">
             </div>
           </div>
           <br ng-if="$index == rows - 1">
