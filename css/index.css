@@ -64,6 +64,11 @@ body {
 
 #table {
   margin: auto;
+  border-collapse: collapse;
+}
+
+td {
+  padding: 0;
 }
 
 ::-webkit-scrollbar {

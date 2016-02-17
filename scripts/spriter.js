@@ -70,7 +70,6 @@ spriterApp.controller("spriterController", function($scope) {
         row++;
       }
     }
-    console.log($scope.matrix);
   };
 })
   .directive('dropTarget', function() {
