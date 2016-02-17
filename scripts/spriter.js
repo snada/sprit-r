@@ -1,4 +1,6 @@
 const electron = require('electron');
+const remote = require('remote');
+const dialog = remote.require('dialog');
 const app = electron.app;
 const fs = require('fs');
 const path = require('path');
@@ -55,6 +57,29 @@ spriterApp.controller("spriterController", function($scope) {
   $scope.deletePics = function() {
     $scope.reset();
     $scope.stateMachine.drop();
+  };
+
+  $scope.saveSpritesheet = function() {
+    var path = remote.dialog.showSaveDialog(
+      remote.BrowserWindow.getFocusedWindow(),
+      {
+        'title': 'Save',
+        'filters': [{ 'name': 'Images', 'extensions': ['png'] }]
+      }
+    );
+    if(path) {
+      var spriteSheet = new Jimp($scope.frameWidth() * $scope.cols, $scope.frameHeight() * $scope.rows, function (err, image) {
+        for(var row = 0; row < $scope.rows; row++) {
+          for(var col = 0; col < $scope.cols; col++) {
+            var frame = $scope.matrix[row][col];
+            if(frame) {
+              image.composite(frame.pic.clone().resize($scope.frameWidth(), $scope.frameHeight()), $scope.frameWidth() * col, $scope.frameHeight() * row);
+            }
+          }
+        }
+      });
+      spriteSheet.write(path);
+    }
   };
 
   $scope.calculateMatrix = function() {
