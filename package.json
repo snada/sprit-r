@@ -1,16 +1,16 @@
 
 {
-  "name": "Spriter",
+  "name": "Sprit-r",
   "version": "0.0.0",
   "description": "Simple spritesheet composer",
   "main": "main.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/snada/spriter.git"
+    "url": "git+https://github.com/snada/sprit-r.git"
   },
   "author": "snada",
   "license": "MIT",
-  "homepage": "spriter.snada.it",
+  "homepage": "spritr.snada.it",
   "devDependencies": {
     "electron-prebuilt": "^0.36.0"
   },

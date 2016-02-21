@@ -9,9 +9,9 @@ const fileType = require('file-type');
 const Jimp = require("jimp");
 const jssm = require("javascript-state-machine");
 
-var spriterApp = angular.module("spriterApp", []);
+var spritrApp = angular.module("spritrApp", []);
 
-spriterApp.controller("spriterController", function($scope) {
+spritrApp.controller("spritrController", function($scope) {
 
   $scope.stateMachine = jssm.create({
     initial: 'drop',
