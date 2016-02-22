@@ -68,6 +68,9 @@ spritrApp.controller("spritrController", function($scope) {
       }
     );
     if(path) {
+      if(!path.toLowerCase().endsWith('.png')) {
+        path += '.png';
+      }
       var spriteSheet = new Jimp($scope.frameWidth() * $scope.cols, $scope.frameHeight() * $scope.rows, function (err, image) {
         for(var row = 0; row < $scope.rows; row++) {
           for(var col = 0; col < $scope.cols; col++) {
