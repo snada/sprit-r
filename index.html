@@ -5,10 +5,12 @@
     <link rel="stylesheet" type="text/css" href="css/index.css">
     <link rel="stylesheet" type="text/css" href="css/button.css">
     <link rel="stylesheet" type="text/css" href="node_modules/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="node_modules/ng-sortable/dist/ng-sortable.min.css">
     <script>
       window.$ = window.jQuery = require('./node_modules/jquery/dist/jquery.min.js');
     </script>
     <script type="text/javascript" src="node_modules/angular/angular.min.js"></script>
+    <script type="text/javascript" src="node_modules/ng-sortable/dist/ng-sortable.min.js"></script>
     <script type="text/javascript" src="config/reset.js"></script>
     <script type="text/javascript" src="scripts/spritr.js"></script>
   </head>
@@ -64,9 +66,11 @@
           </div>
         </div>
         <div id="editor-sidebar-list" class="centered-text">
-          <div class="command" ng-repeat="pic in pictures" ng-show="pictures.length > 0">
-            <img class="transparent thumbnail" ng-src="{{ pic.path }}"></img>
-          </div>
+          <ul data-as-sortable="dragControlListeners" ng-model="pictures">
+            <li data-as-sortable-item class="command" ng-repeat="pic in pictures" ng-show="pictures.length > 0">
+              <img data-as-sortable-item-handle class="transparent thumbnail" ng-src="{{ pic.path }}"></img>
+            </li>
+          </ul>
         </div>
       </div>
       <div id="editor-dragbar"></div>

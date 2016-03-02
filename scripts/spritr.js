@@ -9,7 +9,7 @@ const fileType = require('file-type');
 const Jimp = require("jimp");
 const jssm = require("javascript-state-machine");
 
-var spritrApp = angular.module("spritrApp", []);
+var spritrApp = angular.module("spritrApp", ['as.sortable']);
 
 spritrApp.controller("spritrController", function($scope) {
 
@@ -98,6 +98,13 @@ spritrApp.controller("spritrController", function($scope) {
         row++;
       }
     }
+  };
+
+  $scope.dragControlListeners = {
+    orderChanged: function(event) {
+      $scope.calculateMatrix();
+      console.log('orderchanged');
+    },
   };
 })
   .directive('dropTarget', function() {
