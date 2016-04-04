@@ -1,0 +1,142 @@
+body {
+  background-color: #004C86;
+  -webkit-user-select: none;
+  cursor: default;
+  overflow-y: hidden;
+  overflow-x: hidden;
+  font: 10px arial, sans-serif;
+  color: white;
+  padding: 0px;
+  margin: 0px;
+}
+
+#drop {
+  border: 4px dashed #22805C;
+  margin: 0 auto;
+  height: 90%;
+  width: 90%;
+}
+
+#drop.hover {
+  border: 4px dashed #00A44E;
+}
+
+#editor {
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+
+#editor-sidebar {
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  width:200px;
+}
+
+#editor-sidebar-commands {
+  min-height: 150px;
+  max-height: 150px;
+  height: 150px;
+  overflow-x: hidden;
+  white-space: nowrap;
+}
+
+#editor-sidebar-list {
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+
+#editor-dragbar {
+  width: 3px;
+  background-color: #00A44E;
+  border-right: 1px solid #22805C;
+  cursor: col-resize;
+}
+
+#editor-content {
+  display: flex;
+  flex:1;
+  align-items: center;
+  overflow: scroll;
+  white-space: nowrap;
+}
+
+#table {
+  margin: auto;
+  border-collapse: collapse;
+}
+
+td {
+  padding: 0;
+}
+
+ul, li {
+  padding: 0;
+  margin: 0;
+}
+
+::-webkit-scrollbar {
+  background: transparent;
+  width: 14px;
+  height: 14px;
+}
+
+::-webkit-scrollbar-thumb {
+  width: 5px;
+  height: 5px;
+  background: #002d4f;
+  border-radius: 10px;
+  border: 4px solid rgba(0, 0, 0, 0);
+  background-clip: padding-box;
+}
+
+::-webkit-scrollbar-corner {
+  display: none;
+}
+
+::-webkit-scrollbar-button {
+  width: 0;
+  height: 0;
+  display: none;
+}
+
+.thumbnail {
+  max-width: 150px;
+}
+
+.transparent {
+  background-color: #cccccc;
+  background-image: linear-gradient(45deg, white 25%, transparent 25%, transparent 75%, white 75%, white),
+                    linear-gradient(45deg, white 25%, transparent 25%, transparent 75%, white 75%, white);
+  background-size: 18px 18px;
+  background-position:0 0, 9px 9px
+}
+
+.command {
+  margin-top: 10px;
+  min-width: 200px;
+}
+
+.pic-thumb {
+  max-width: 160px;
+}
+
+.label {
+  font-size: 20px;
+}
+
+.centered-text {
+  text-align: center;
+}
+
+.centered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.icon {
+  font-size: 4em !important;
+}

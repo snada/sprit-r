@@ -1,0 +1,91 @@
+<html ng-app="spritrApp">
+  <head>
+    <meta charset="UTF-8">
+    <title>Sprit-r</title>
+    <link rel="stylesheet" type="text/css" href="css/index.css">
+    <link rel="stylesheet" type="text/css" href="css/button.css">
+    <link rel="stylesheet" type="text/css" href="node_modules/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="node_modules/ng-sortable/dist/ng-sortable.min.css">
+    <script>
+      window.$ = window.jQuery = require('./node_modules/jquery/dist/jquery.min.js');
+    </script>
+    <script type="text/javascript" src="node_modules/angular/angular.min.js"></script>
+    <script type="text/javascript" src="node_modules/ng-sortable/dist/ng-sortable.min.js"></script>
+    <script type="text/javascript" src="config/reset.js"></script>
+    <script type="text/javascript" src="scripts/spritr.js"></script>
+  </head>
+  <body ng-controller="spritrController">
+
+    <div ng-show="stateMachine.is('drop')" class="ng-hide">
+      <div id="drop" class="centered" drop-target>
+        <p class="centered">
+          <i class="icon fa fa-arrow-down"></i>
+        </p>
+      </div>
+    </div>
+
+    <div ng-show="stateMachine.is('loading')" class="ng-hide">
+      <p class="centered">
+        <i class="icon fa fa-spinner fa-spin"></i>
+      </p>
+    </div>
+
+    <div id="editor" ng-show="stateMachine.is('editor')" class="ng-hide">
+      <div id="editor-sidebar">
+        <div id="editor-sidebar-commands" class="centered-text">
+          <div class="command">
+            <section class="press">
+              <button class="green" ng-click="saveSpritesheet()">
+                <i class="fa fa-floppy-o"></i>
+              </button>
+            </section>
+            <section class="press">
+              <button class="red" ng-click="deletePics()">
+                <i class="fa fa-trash"></i>
+              </button>
+            </section>
+          </div>
+          <div class="command">
+            <span class="label"><i class="fa fa-search-minus"></i></span>
+            <input id="scale" type="range" min="1" max="100" ng-model="scale"></input>
+            <span class="label"><i class="fa fa-search-plus"></i></span>
+            <div><i class="fa fa-arrows-h"></i> {{ frameWidth() }} <i class="fa fa-arrows-v"></i> {{ frameHeight() }}</div>
+          </div>
+          <div class="command">
+            <select
+              ng-model="rows"
+              ng-change="calculateCols()"
+              ng-options="(pictures.indexOf(pic)+1) as pictures.indexOf(pic)+1 for pic in pictures">
+            </select>
+            x
+            <select
+              ng-model="cols"
+              ng-change="calculateRows()"
+              ng-options="(pictures.indexOf(pic)+1) as pictures.indexOf(pic)+1 for pic in pictures">
+            </select>
+          </div>
+        </div>
+        <div id="editor-sidebar-list" class="centered-text">
+          <ul data-as-sortable="dragControlListeners" ng-model="pictures">
+            <li data-as-sortable-item class="command" ng-repeat="pic in pictures" ng-show="pictures.length > 0">
+              <img data-as-sortable-item-handle class="transparent thumbnail" ng-src="{{ pic.path }}"></img>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div id="editor-dragbar"></div>
+      <div id="editor-content">
+        <table id="table" class="transparent">
+          <tr ng-model="matrix" ng-repeat="row in matrix">
+            <td ng-repeat="pic in row">
+              <img ng-model="scale" ng-src="{{pic.path}}" ng-style="{width: frameWidth(), height: frameHeight()}">
+            </td>
+            <td ng-if="row.length == 0" ng-style="{width: frameWidth(), height: frameHeight()}"></td>
+          </tr>
+        </table>
+      </div>
+    </div>
+
+  </body>
+  <script type="text/javascript" src="config/editor.js"></script>
+</html>
